@@ -1,7 +1,6 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Cash Advance as a service",
     "version": "1.0",
     "title": "Cash Advance API Documentation"
   },
@@ -9,17 +8,16 @@
   "basePath": "/cashadvance/v4",
   "tags": [
     {
-      "name": "Cash Advance APIs",
-      "description": "v4 APIs"
+      "name": "Cash Advance API"
     }
   ],
   "paths": {
-    "/companies/{companyId}/cashadvances": {
+    "/cashadvances": {
       "post": {
         "tags": [
-          "Cash Advance APIs"
+          "Cash Advance API"
         ],
-        "summary": "Create a new Request",
+        "summary": "Create a Cash Advance",
         "consumes": [
           "application/json"
         ],
@@ -37,16 +35,9 @@
             }
           },
           {
-            "name": "companyId",
-            "in": "path",
-            "description": "Unique identifier for company",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "concur-correlationid",
             "in": "header",
-            "description": "The unique identifier of the consumer making the API calls. Minimum length: 6 characters",
+            "description": "The unique identifier of the consumer making the API calls",
             "required": true,
             "type": "string"
           }
@@ -61,55 +52,54 @@
           "400": {
             "description": "Invalid request body",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "401": {
             "description": "Invalid or nonexistent authorization HTTP header",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "403": {
             "description": "Permission Denied",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "404": {
             "description": "Not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "408": {
             "description": "Timed out",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "500": {
             "description": "Internal server error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "503": {
             "description": "The service is currently unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           }
         }
       }
     },
-    "/companies/{companyId}/cashadvances/{cashadvanceId}": {
+    "/cashadvances/{cashadvanceId}": {
       "get": {
         "tags": [
-          "Cash Advance API's"
+          "Cash Advance API"
         ],
         "summary": "Get Details of a Cash Advance",
-        "operationId": "getCommentsByRequestUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -125,16 +115,9 @@
             "type": "string"
           },
           {
-            "name": "companyId",
-            "in": "path",
-            "description": "Unique identifier for company",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "concur-correlationid",
             "in": "header",
-            "description": "The unique identifier of the consumer making the API calls. Minimum length: 6 characters",
+            "description": "The unique identifier of the consumer making the API calls",
             "required": true,
             "type": "string"
           }
@@ -149,52 +132,54 @@
           "400": {
             "description": "Bad Param: invalid Cash Advance Id.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "401": {
             "description": "Invalid or nonexistent authorization HTTP header",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "403": {
-            "description": "Permission Denied"
+            "description": "Permission Denied",
+            "schema": {
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
+            }
           },
           "404": {
             "description": "Not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "408": {
             "description": "Timed out",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "500": {
             "description": "An unexpected error has prevented the operation",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "503": {
             "description": "The service is currently unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           }
         }
       }
     },
-    "/companies/{companyId}/cashadvances/{cashadvanceId}/issue": {
+    "/cashadvances/{cashadvanceId}/issue": {
       "post": {
         "tags": [
-          "Cash Advance API's"
+          "Cash Advance API"
         ],
         "summary": "Issue a Cash Advance",
-        "operationId": "createUsingPOST_4asd",
         "consumes": [
           "application/json"
         ],
@@ -210,16 +195,9 @@
             "type": "string"
           },
           {
-            "name": "companyId",
-            "in": "path",
-            "description": "Unique identifier for company",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "concur-correlationid",
             "in": "header",
-            "description": "The unique identifier of the consumer making the API calls. Minimum length: 6 characters",
+            "description": "The unique identifier of the consumer making the API calls",
             "required": true,
             "type": "string"
           },
@@ -234,8 +212,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "OK",
+          "200": {
+            "description": "Issued",
             "schema": {
               "$ref": "#/definitions/CashAdvanceIssueResponse"
             }
@@ -243,43 +221,43 @@
           "400": {
             "description": "Invalid request body",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "401": {
             "description": "Invalid or nonexistent authorization HTTP header",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "403": {
             "description": "Permission Denied",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "404": {
             "description": "Not found",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
-           "408": {
+          "408": {
             "description": "Timed out",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "500": {
             "description": "Internal server error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           },
           "503": {
             "description": "The service is currently unavailable",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ObjectArrayOfErrorItems"
             }
           }
         }
@@ -287,72 +265,66 @@
     }
   },
   "definitions": {
+    "ObjectArrayOfErrorItems": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "$ref": "#/definitions/ArrayOfErrorItems"
+        }
+      }
+    },
+    "ArrayOfErrorItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ErrorItems"
+      }
+    },
+    "ErrorItems": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
     "CreateCashAdvanceResponse": {
       "type": "object",
       "properties": {
         "cashAdvanceId": {
           "type": "string",
-          "description": "Cash Advance Identifier"
-        },
-        "url": {
-          "type": "string",
-          "description": "Get Cash Advance URL"
+          "description": "Unique cash advance identifier"
         }
       }
     },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "string",
-          "description": "Error"
-        },
-        "message": {
-          "type": "string",
-          "description": "Message"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Status"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "int64",
-          "description": "Time Stamp"
-        }
-      }
-    },
-     "CashAdvance": {
+    "CashAdvance": {
       "type": "object",
       "properties": {
         "accountCode": {
           "type": "string",
-          "description": "Account Code if not provided will be read from Employee profile configuration data"
+          "description": "The account code, if not provided, will be read from the employee profile configuration data"
         },
         "amountRequested": {
-          "description": "Amount Requested",
+          "description": "The amount of the cash advance",
           "$ref": "#/definitions/ApprovalRequested"
         },
         "comment": {
           "type": "string",
-          "description": "Comment while creating a cash advance."
+          "description": "Comment while creating a cash advance"
         },
-         "name": {
+        "name": {
           "type": "string",
-          "description": "Cash Advance Name"
+          "description": "Cash advance name"
         },
-         "purpose": {
+        "purpose": {
           "type": "string",
-          "description": "Purpose for cash advance"
-        },
-        "reimbursementCurrency": {
-          "type": "string",
-          "description": "Currency in which Cash Advance needs to be reimbursed to user"
+          "description": "Purpose of raising a cash advance"
         },
         "userId": {
           "type": "string",
-          "description": "The unique identifier of the SAP Concur user. Use User Profile v1.0 to retrieve the userID"
+          "description": "The unique identifier of the SAP Concur user. Use Identity v4 to retrieve the userID"
         }
       }
     },
@@ -365,80 +337,80 @@
         },
         "currency": {
           "type": "string",
-          "description": "Currency Code in which Cash Advance is requested"
+          "description": "The 3-letter ISO 4217 currency code"
         }
       }
     },
     "CashAdvanceData": {
       "type": "object",
       "properties": {
-        "accountCode": {
+        "paymentType": {
           "type": "string",
-          "description": "Account Code"
-        },
-        "amountRequested": {
-          "description": "Requested Amount",
-          "$ref": "#/definitions/RequestedAmount"
-        },
-        "approvalStatus": {
-          "type": "string",
-          "description": "Status",
-          "$ref": "#/definitions/Status"
-        },
-         "availableBalance": {
-          "type": "string",
-          "description": "Available Balance",
-          "$ref": "#/definitions/AvailableBalance"
-        },
-         "cashAdvanceId": {
-          "type": "string",
-          "description": "Unique identifier for cash advance"
-        },
-        "comment": {
-          "type": "string",
-          "description": "Latest comment on cash advance"
+          "description": "Details on type of the payment used",
+          "$ref": "#/definitions/PaymentType"
         },
         "exchangeRate": {
           "type": "string",
-          "description": "Cash Advance Exchange Rate",
+          "description": "Details on the exchange rate",
           "$ref": "#/definitions/CashAdvanceExchangeRate"
         },
-        "hasReceipts": {
-          "type": boolean,
-          "description": "Indicates cash advance has receipts"
+        "amountRequested": {
+          "description": "Details on the amount requested",
+          "$ref": "#/definitions/RequestedAmount"
+        },
+        "availableBalance": {
+          "type": "string",
+          "description": "Details on the available balance",
+          "$ref": "#/definitions/AvailableBalance"
+        },
+        "approvalStatus": {
+          "type": "string",
+          "description": "Details on the approval status",
+          "$ref": "#/definitions/Status"
+        },
+        "cashAdvanceId": {
+          "type": "string",
+          "description": "Unique cash advance identifier"
+        },
+        "requestDate": {
+          "type": "string",
+          "description": "The date the cash advance was requested"
+        },
+        "name": {
+          "type": "string",
+          "description": "Cash advance name"
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Purpose of raising a cash advance"
         },
         "issuedDate": {
           "type": "string",
           "description": "The date the cash advance was issued"
         },
+        "accountCode": {
+          "type": "string",
+          "description": "Account code linked to the employee"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Comment while creating a cash advance"
+        },
         "lastModifiedDate": {
           "type": "string",
-          "description": "The date when this cash advance was last modified"
+          "description": "The date the cash advance was last modified"
         },
-        "name": {
-          "type": "string",
-          "description": "Cash Advance Name"
-        },
-        "paymentType": {
-          "type": "string",
-          "description": "Payment Type",
-          "$ref": "#/definitions/PaymentType"
-        },
-        "purpose": {
-          "type": "string",
-          "description": "Purpose for cash advance"
+        "hasReceipts": {
+          "type": "boolean",
+          "description": "If the cash advance has receipts"
         },
         "reimbursementCurrency": {
           "type": "string",
-          "description": "Currency in which Cash Advance needs to be reimbursed to user"
-        },
-        "requestDate": {
-          "type": "string",
-          "description": "The date the cash advance was requested"
+          "description": "The 3-letter ISO 4217 currency code"
         }
       }
     },
-     "RequestedAmount": {
+    "RequestedAmount": {
       "type": "object",
       "properties": {
         "amount": {
@@ -447,7 +419,7 @@
         },
         "currency": {
           "type": "string",
-          "description": "Currency Code in which Cash Advance was requested"
+          "description": "The 3-letter ISO 4217 currency code"
         },
         "value": {
           "type": "string",
@@ -455,7 +427,7 @@
         }
       }
     },
-     "Status": {
+    "Status": {
       "type": "object",
       "properties": {
         "code": {
@@ -468,7 +440,7 @@
         }
       }
     },
-     "AvailableBalance": {
+    "AvailableBalance": {
       "type": "object",
       "properties": {
         "amount": {
@@ -477,16 +449,16 @@
         },
         "currency": {
           "type": "string",
-          "description": "The 3-letter ISO 4217 code of the currency in which the cash advance available balance is expressed"
+          "description": "The 3-letter ISO 4217 currency code"
         }
       }
     },
-     "CashAdvanceExchangeRate": {
+    "CashAdvanceExchangeRate": {
       "type": "object",
       "properties": {
         "operation": {
           "type": "string",
-          "description": "Exchange rate operation. Possible values: 'MULTIPLY'"
+          "description": "Exchange rate operation. Supported values: 'MULTIPLY'"
         },
         "value": {
           "type": "string",
@@ -494,7 +466,7 @@
         }
       }
     },
-     "PaymentType": {
+    "PaymentType": {
       "type": "object",
       "properties": {
         "description": {
@@ -507,24 +479,24 @@
         }
       }
     },
-     "CashAdvanceIssueRequest": {
+    "CashAdvanceIssueRequest": {
       "type": "object",
       "properties": {
         "accountCode": {
           "type": "string",
-          "description": "Account Code linked to the employee"
+          "description": "Account code linked to the employee"
         },
         "comment": {
           "type": "string",
-          "description": "The comment for issuing this cash advance"
+          "description": "Comment while issuing a cash advance."
         },
         "exchangeRate": {
           "type": "number",
-          "description": "The exchange rate that applies to the expected expense, if exchange rate is not provided default value will be 1"
+          "description": "The exchange rate that applies to the expected expense.If no exchange rate is provided system exchange rate will be considered."
         }
       }
     },
-     "CashAdvanceIssueResponse": {
+    "CashAdvanceIssueResponse": {
       "type": "object",
       "properties": {
         "issuedDate": {
@@ -532,12 +504,12 @@
           "description": "The date the cash advance was issued"
         },
         "status": {
-          "description": "Cash Advance Status",
+          "description": "Details on type of payment used",
           "$ref": "#/definitions/CashAdvanceStatus"
-        },
+        }
       }
     },
-     "CashAdvanceStatus": {
+    "CashAdvanceStatus": {
       "type": "object",
       "properties": {
         "code": {
@@ -546,7 +518,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the issued Cash Advance"
+          "description": "Cash advance status name"
         }
       }
     }
